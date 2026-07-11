@@ -1,0 +1,11 @@
+a2ui-agui-kit
+Copyright 2026 qte77
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+Ported from (attribution):
+- qte77/agenthud-agui-a2ui (Apache-2.0) — src/contract.ts, src/events.ts,
+  src/applyA2UIEvent.ts, and the A2UI catalog rules in src/prompt.ts
+- qte77/ldnmxx-hack (Apache-2.0) — src/guard.ts, src/renderTool.ts, the
+  Provider/ToolSpec/runChain combinator in src/providers.ts, and the condensed A2UI rules
+  referenced in src/prompt.ts

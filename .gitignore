@@ -1,0 +1,12 @@
+# deps / build
+node_modules/
+dist/
+*.tsbuildinfo
+
+# secrets / local env — never commit; *.example templates stay tracked
+.npmrc
+!.npmrc.example
+
+# misc
+*.log
+.DS_Store
