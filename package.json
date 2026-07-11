@@ -1,0 +1,51 @@
+{
+  "name": "@qte77/a2ui-agui-kit",
+  "version": "0.1.0",
+  "description": "Shared AG-UI + A2UI protocol bridge: contract validation, event vocabulary, prompt-injection guard, and a runtime-agnostic provider/tool-call combinator for building agents that render A2UI surfaces.",
+  "type": "module",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qte77/a2ui-agui-kit"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "a2ui",
+    "ag-ui",
+    "agent",
+    "protocol",
+    "zod"
+  ],
+  "peerDependencies": {
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^24.0.0",
+    "eslint": "^10.6.0",
+    "eslint-plugin-sonarjs": "^4.1.0",
+    "globals": "^17.7.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.63.0",
+    "vitest": "^4.1.10",
+    "zod": "^4.4.3"
+  }
+}

@@ -1,0 +1,8 @@
+# Copy to .npmrc (gitignored) and fill in a token to install/publish @qte77 packages from
+# GitHub Packages. Locally, use a classic or fine-grained PAT with `read:packages` (add
+# `write:packages` too if you'll publish). In CI, NODE_AUTH_TOKEN is set from the job's
+# GITHUB_TOKEN (with `permissions: packages: read` or `write` as needed) — see
+# .github/workflows/ci.yml / publish.yml.
+
+@qte77:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
