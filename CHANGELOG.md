@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Version 0.3.0: restore **functional depth** to `styles/a2ui.css` — cards, the loading skeleton,
+  and the "working" chip regain `box-shadow: var(--shadow-card)`, and the skeleton's loading
+  **shimmer** is a token-driven `linear-gradient` background-position sweep again (0.2.0 had
+  flattened it to a solid opacity pulse). The generating chip stays non-pill (`var(--radius-md)`).
+  Adds `@qte77/ui-theme` (>= 0.2.0) as an optional peer for the `--shadow-card` token.
+  `.stylelintrc.json` drops the `box-shadow`/`*-gradient` bans — functional depth is now sanctioned
+  by qte77 `brand/DESIGN.md` "Motion & effects"; `color-no-hex` stays so the surface remains
+  token-driven. Reverses the 0.2.0 flattening, which was based on a misread of the brand intent.
+
 ### Added
 
 - Version 0.2.0: React presentation layer + flattened A2UI surface styles as new package entry
