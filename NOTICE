@@ -5,7 +5,10 @@ Licensed under the Apache License, Version 2.0 (see LICENSE).
 
 Ported from (attribution):
 - qte77/agenthud-agui-a2ui (Apache-2.0) — src/contract.ts, src/events.ts,
-  src/applyA2UIEvent.ts, and the A2UI catalog rules in src/prompt.ts
+  src/applyA2UIEvent.ts, and the A2UI catalog rules in src/prompt.ts, plus src/react/A2UISurface.tsx,
+  src/react/CatalogViewer.tsx, src/react/EventStream.tsx, src/react/a2uiTheme.ts, and
+  styles/a2ui.css (ported from ui/src/A2UISurface.tsx, ui/src/CatalogViewer.tsx,
+  ui/src/EventStream.tsx, ui/src/theme/a2uiTheme.ts, and ui/src/index.css)
 - qte77/ldnmxx-hack (Apache-2.0) — src/guard.ts, src/renderTool.ts, the
   Provider/ToolSpec/runChain combinator in src/providers.ts, and the condensed A2UI rules
   referenced in src/prompt.ts

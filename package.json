@@ -1,7 +1,7 @@
 {
   "name": "@qte77/a2ui-agui-kit",
-  "version": "0.1.0",
-  "description": "Shared AG-UI + A2UI protocol bridge: contract validation, event vocabulary, prompt-injection guard, and a runtime-agnostic provider/tool-call combinator for building agents that render A2UI surfaces.",
+  "version": "0.2.0",
+  "description": "Shared AG-UI + A2UI protocol bridge: contract validation, event vocabulary, prompt-injection guard, a runtime-agnostic provider/tool-call combinator, and an optional React presentation layer (A2UISurface/CatalogViewer/EventStream) with flattened A2UI surface styles.",
   "type": "module",
   "license": "Apache-2.0",
   "repository": {
@@ -15,15 +15,22 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    }
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "default": "./dist/react/index.js"
+    },
+    "./styles.css": "./dist/styles.css"
   },
   "files": [
-    "dist"
+    "dist",
+    "NOTICE"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "tsc -p tsconfig.build.json && node scripts/copy-css.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
+    "stylelint": "stylelint \"styles/**/*.css\"",
     "test": "vitest run",
     "test:watch": "vitest"
   },
@@ -32,17 +39,39 @@
     "ag-ui",
     "agent",
     "protocol",
-    "zod"
+    "zod",
+    "react"
   ],
   "peerDependencies": {
-    "zod": "^4.4.3"
+    "zod": "^4.4.3",
+    "react": "^19.2.0",
+    "@a2ui/react": ">=0.10.1 <0.11"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "@a2ui/react": {
+      "optional": true
+    }
   },
   "devDependencies": {
+    "@a2ui/react": "^0.10.1",
     "@eslint/js": "^10.0.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^24.0.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^10.6.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-sonarjs": "^4.1.0",
     "globals": "^17.7.0",
+    "jsdom": "^29.1.1",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "stylelint": "^17.14.0",
+    "stylelint-config-standard": "^40.0.0",
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.63.0",
     "vitest": "^4.1.10",

@@ -37,7 +37,7 @@ jobs:
           semgrep scan --config p/typescript --error
 
   build:
-    name: typecheck + lint + test + build
+    name: typecheck + lint + stylelint + test + build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -58,6 +58,9 @@ jobs:
 
       - name: Lint
         run: npm run lint
+
+      - name: Stylelint (flat-design gate)
+        run: npm run stylelint
 
       - name: Test
         run: npm test

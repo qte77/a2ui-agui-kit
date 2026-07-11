@@ -11,6 +11,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Version 0.2.0: React presentation layer + flattened A2UI surface styles as new package entry
+  points. `src/react/` (exported as `@qte77/a2ui-agui-kit/react`): `A2UISurface.tsx`
+  (`A2UISurfaceProvider`/`A2UISurface`, ported from agenthud-agui-a2ui's `ui/src/A2UISurface.tsx`
+  — de-coupled from its app-specific action-bridge singleton in favor of a plain `onAction` prop),
+  `CatalogViewer.tsx` (ported unchanged from `ui/src/CatalogViewer.tsx`), `EventStream.tsx`
+  (ported from `ui/src/EventStream.tsx`, now importing `EventLogEntry` from the core layer's
+  `events.ts` instead of an app-specific module, plus a new optional `renderExtra?: (entry) =>
+  ReactNode` prop so a consumer can append its own per-entry content — e.g. a usage status chip —
+  without forking the component), `a2uiTheme.ts` (ported from `ui/src/theme/a2uiTheme.ts`).
+  `styles/a2ui.css` (exported as `@qte77/a2ui-agui-kit/styles.css`): the `.a2ui-surface .qte-*`
+  component rules + motion/skeleton/busy states, ported from agenthud-agui-a2ui's
+  `ui/src/index.css` and **flattened** per qte77's `brand/DESIGN.md` "Motion & effects" mandate —
+  no `box-shadow` (card/skeleton/chip elevation is a `border` + surface-tone step), the skeleton
+  shimmer is a solid opacity pulse instead of a `linear-gradient` background-position animation,
+  and the generating chip's `border-radius: 999px` pill is now `var(--radius-md)`. Colors and
+  radii are all `@qte77/ui-theme` CSS custom properties (no raw hex). `react` and `@a2ui/react`
+  are optional peer dependencies — the core layer stays usable without React.
+- `.stylelintrc.json` + `npm run stylelint`: the flat-design enforcement gate —
+  `declaration-property-value-disallowed-list` bans `box-shadow` and any `*-gradient` in
+  `background`/`background-image`, `color-no-hex` forces token-var colors. Wired into
+  `.github/workflows/ci.yml`'s build job.
+- `vitest.config.ts`: split into a `core` project (plain Node, existing core-layer tests) and a
+  `react` project (jsdom + `@testing-library/react` + `@testing-library/jest-dom`, `tests/react/`).
+  `eslint.config.js`: `.tsx` coverage + `eslint-plugin-react-hooks`, scoped to `src/react` and
+  `tests/react`.
 - Initial core (dependency-light) package: `src/contract.ts` (zod A2UI wire-format
   schemas + acyclic-tree guard + recording/decision-tree shape, ported from
   agenthud-agui-a2ui), `src/events.ts` (AG-UI event vocabulary + `EventLogEntry`/
