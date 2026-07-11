@@ -13,16 +13,21 @@ self-contained and tracked — treat it as the source of truth.
 
 ## Scope
 
-This package is the CORE (dependency-light) layer: zod-validated contracts and plain
-logic, no React. Do not add React components, styles, or a runtime-specific provider
-implementation (Cloudflare/OpenRouter/fetch) here — those belong in the consuming app or
-a later `./react` entry point.
+This package has two layers. `src/*.ts` (default export, `@qte77/a2ui-agui-kit`) is the CORE
+dependency-light layer: zod-validated contracts and plain logic, no React. `src/react/*.tsx`
+(`@qte77/a2ui-agui-kit/react`, optional peer deps `react` + `@a2ui/react`) is the presentation
+layer — A2UISurface/CatalogViewer/EventStream/a2uiTheme — plus `styles/a2ui.css`
+(`@qte77/a2ui-agui-kit/styles.css`). Do not add a runtime-specific provider implementation
+(Cloudflare/OpenRouter/fetch) to either layer — that belongs in the consuming app. Never let the
+core layer import from `src/react/` — the core must stay usable without React installed.
 
 ## Tests
 
-- Tests live in `tests/` (flat); import the module under test via `../src/….js`.
+- Core tests live in `tests/` (flat); react tests live in `tests/react/` (jsdom project). Import
+  the module under test via `../src/….js` or `../../src/react/….js`.
 - **Test what matters:** contract validation, `applyA2UIEvent`, `detectInjection`,
-  `runChain` — real logic. Skip trivial config/type-only files; don't chase coverage.
+  `runChain`, and react-layer behavior (props, callbacks, DOM output) — real logic. Skip trivial
+  config/type-only files and CSS/styling; don't chase coverage.
 - **Red-Green-Refactor:** for load-bearing module logic, write the failing behavior test
   **first** (Red), implement the minimum to pass (Green), then refactor.
 

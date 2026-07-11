@@ -5,13 +5,15 @@
 > A2UI surfaces.
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-58f4c2.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.1.0-58f4c2.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.2.0-58f4c2.svg)](CHANGELOG.md)
 [![CI](https://github.com/qte77/a2ui-agui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/qte77/a2ui-agui-kit/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/qte77/a2ui-agui-kit/actions/workflows/codeql.yml/badge.svg)](https://github.com/qte77/a2ui-agui-kit/actions/workflows/codeql.yml)
 
-> This is the CORE (dependency-light) layer only — zod-validated contracts and plain
-> logic, no React. A `@qte77/a2ui-agui-kit/react` entry point (A2UISurface, CatalogViewer,
-> EventStream, a2uiTheme, styles.css) is a later phase.
+> Two layers, one package: the CORE (dependency-light, zod-validated contracts and plain
+> logic, no React) is the default entry point. An optional `@qte77/a2ui-agui-kit/react` entry
+> point adds the presentation layer (A2UISurface, CatalogViewer, EventStream), and
+> `@qte77/a2ui-agui-kit/styles.css` ships the flattened A2UI surface styles. Both are optional —
+> a consumer that only needs contract validation never pulls in React.
 
 ## What
 
@@ -31,6 +33,28 @@ the same A2UI contract instead of hand-copying it:
   combinator for chaining forced-tool-call backends
 - `prompt.ts` — `buildSystemPrompt`: a parameterized A2UI system-prompt builder (the app
   supplies its own domain instructions)
+
+Optional React presentation layer (`@qte77/a2ui-agui-kit/react`, peer-deps `react` +
+`@a2ui/react`):
+
+- `A2UISurfaceProvider` / `A2UISurface` — wraps `@a2ui/react`'s `A2UIProvider` +
+  `A2UIRenderer`, pre-registers the default component catalog, and applies the kit's theme.
+  `onAction` is a plain callback prop (`(actionName: string) => void`) — wire it to your own
+  agent/transport, or omit it for a no-op.
+- `CatalogViewer` — a modal listing the A2UI standard component catalog.
+- `EventStream` — renders an `EventLogEntry[]` event log; accepts an optional
+  `renderExtra?: (entry) => ReactNode` to append per-entry content (e.g. a consumer's own usage
+  chip) without forking the component.
+- `qteA2uiTheme` (from `a2uiTheme.ts`) — routes the A2UI catalog's themeable components to the
+  kit's `qte-*` class hooks, styled in `styles/a2ui.css`.
+
+`@qte77/a2ui-agui-kit/styles.css` — the `.a2ui-surface .qte-*` component rules `qteA2uiTheme`
+targets, plus the surface's motion/skeleton/busy states. **Flat by design** (per qte77's
+`brand/DESIGN.md` "Motion & effects"): elevation is a `border` + surface-tone step, never a
+`box-shadow`; there is no gradient shimmer and no pill radii (only the border-radius scale,
+4/6/12px). Motion is limited to a subtle entrance and a low-contrast "working" pulse, both
+collapsed under `prefers-reduced-motion`. It expects `@qte77/ui-theme`'s CSS custom properties
+(`--color-*` / `--radius-*` / `--font-*`) to already be in scope — import that stylesheet first.
 
 ## How
 
@@ -70,6 +94,24 @@ import {
 
 const entry = applyA2UIEvent(event, Date.now(), (messages) => renderSurface(messages));
 const log = appendLogEntry(previousLog, entry);
+```
+
+To use the React presentation layer, install `react`, `react-dom`, and `@a2ui/react` alongside
+this package, import `@qte77/ui-theme` (or your own tokens) and this kit's styles once, then
+render the surface:
+
+```ts
+import "@qte77/ui-theme/tailwind/tokens.css"; // --color-*/--radius-*/--font-* tokens
+import "@qte77/a2ui-agui-kit/styles.css";
+
+import { A2UISurfaceProvider, A2UISurface, EventStream } from "@qte77/a2ui-agui-kit/react";
+```
+
+```tsx
+<A2UISurfaceProvider onAction={(name) => sendAction(name)}>
+  <A2UISurface fallback={<div className="qte-skeleton" />} />
+</A2UISurfaceProvider>
+<EventStream events={log} renderExtra={(entry) => <UsageChip entry={entry} />} />
 ```
 
 ## Why
