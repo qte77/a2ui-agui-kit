@@ -6,11 +6,11 @@
  * lives in `@qte77/ui-theme` — import it first) and the app-specific brand-mark/gh-icon/
  * theme-toggle rules (those belong to the consuming app, not this shared surface).
  *
- * FLAT by mandate (qte77 brand/DESIGN.md "Motion & effects"): elevation comes from the
- * `border` + `surface` tone step, never from shadow — no `box-shadow`, no gradients, no pill
- * radii. Motion is allowed only when functional and subtle (an entrance, a low-contrast
- * "working" pulse), and collapses under `prefers-reduced-motion`. All colors and radii are CSS
- * custom properties from `@qte77/ui-theme` — never a raw hex or an inline shadow/gradient value.
+ * Functional depth (qte77 brand/DESIGN.md "Motion & effects"): a subtle elevation shadow
+ * (`var(--shadow-card)`) and a token-driven loading shimmer are used where they aid the reader;
+ * decorative gloss stays out and the generating chip is not a pill. Motion is functional and
+ * subtle, and collapses under `prefers-reduced-motion`. All colors, radii, and the shadow are CSS
+ * custom properties from `@qte77/ui-theme` — never a raw hex or an inline color value.
  */
 
 /* Surface baseline: font + text colour inherit past the library's `all: revert` reset. */
@@ -19,11 +19,12 @@
   color: var(--color-text);
 }
 
-/* Card — a surface panel, flat: border + surface-tone step only (no box-shadow). */
+/* Card — an elevated surface panel: border + surface tone + subtle --shadow-card depth. */
 .a2ui-surface .qte-card {
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   padding: 1.25rem;
 }
 
@@ -160,16 +161,15 @@
 }
 
 /* Pending-render skeleton: card-shaped placeholder shown via A2UIRenderer's `fallback` while the
- * surface is empty and a run is streaming. Flat: a solid opacity pulse, never a gradient
- * shimmer. */
-@keyframes qte-skeleton-pulse {
-  0%,
-  100% {
-    opacity: 1;
+ * surface is empty and a run is streaming. A token-driven gradient shimmer sweeps the bars to
+ * signal "in progress" (DESIGN.md sanctions the loading shimmer). */
+@keyframes qte-shimmer {
+  from {
+    background-position: -200% 0;
   }
 
-  50% {
-    opacity: 0.55;
+  to {
+    background-position: 200% 0;
   }
 }
 
@@ -177,6 +177,7 @@
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
   padding: 1.25rem;
   max-width: 36rem;
 }
@@ -185,8 +186,14 @@
   height: 0.8rem;
   border-radius: var(--radius-sm);
   margin-bottom: 0.75rem;
-  background-color: var(--color-border);
-  animation: qte-skeleton-pulse 1.4s ease-in-out infinite;
+  background: linear-gradient(
+      90deg,
+      var(--color-border) 25%,
+      color-mix(in srgb, var(--color-border) 45%, var(--color-surface)) 50%,
+      var(--color-border) 75%
+    )
+    0 0 / 200% 100%;
+  animation: qte-shimmer 1.4s linear infinite;
 }
 
 .qte-skeleton-bar:last-child {
@@ -209,6 +216,7 @@
   padding: 0.2rem 0.6rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
   background-color: var(--color-surface);
   color: var(--color-primary);
   font-size: 0.72rem;
@@ -227,7 +235,7 @@
   }
 }
 
-/* Honor reduced-motion globally — collapses qte-enter / qte-skeleton-pulse / qte-chip-pulse. */
+/* Honor reduced-motion globally — collapses qte-enter / qte-shimmer / qte-chip-pulse. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

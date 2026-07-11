@@ -1,10 +1,6 @@
 {
   "extends": "stylelint-config-standard",
   "rules": {
-    "color-no-hex": true,
-    "declaration-property-value-disallowed-list": {
-      "box-shadow": ["/.+/"],
-      "/^background(-image)?$/": ["/gradient/"]
-    }
+    "color-no-hex": true
   }
 }

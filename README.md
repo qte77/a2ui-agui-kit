@@ -5,14 +5,14 @@
 > A2UI surfaces.
 
 [![License](https://img.shields.io/badge/license-Apache%202.0-58f4c2.svg)](LICENSE)
-[![Version](https://img.shields.io/badge/version-0.2.0-58f4c2.svg)](CHANGELOG.md)
+[![Version](https://img.shields.io/badge/version-0.3.0-58f4c2.svg)](CHANGELOG.md)
 [![CI](https://github.com/qte77/a2ui-agui-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/qte77/a2ui-agui-kit/actions/workflows/ci.yml)
 [![CodeQL](https://github.com/qte77/a2ui-agui-kit/actions/workflows/codeql.yml/badge.svg)](https://github.com/qte77/a2ui-agui-kit/actions/workflows/codeql.yml)
 
 > Two layers, one package: the CORE (dependency-light, zod-validated contracts and plain
 > logic, no React) is the default entry point. An optional `@qte77/a2ui-agui-kit/react` entry
 > point adds the presentation layer (A2UISurface, CatalogViewer, EventStream), and
-> `@qte77/a2ui-agui-kit/styles.css` ships the flattened A2UI surface styles. Both are optional —
+> `@qte77/a2ui-agui-kit/styles.css` ships the A2UI surface styles. Both are optional —
 > a consumer that only needs contract validation never pulls in React.
 
 ## What
@@ -49,12 +49,12 @@ Optional React presentation layer (`@qte77/a2ui-agui-kit/react`, peer-deps `reac
   kit's `qte-*` class hooks, styled in `styles/a2ui.css`.
 
 `@qte77/a2ui-agui-kit/styles.css` — the `.a2ui-surface .qte-*` component rules `qteA2uiTheme`
-targets, plus the surface's motion/skeleton/busy states. **Flat by design** (per qte77's
-`brand/DESIGN.md` "Motion & effects"): elevation is a `border` + surface-tone step, never a
-`box-shadow`; there is no gradient shimmer and no pill radii (only the border-radius scale,
-4/6/12px). Motion is limited to a subtle entrance and a low-contrast "working" pulse, both
-collapsed under `prefers-reduced-motion`. It expects `@qte77/ui-theme`'s CSS custom properties
-(`--color-*` / `--radius-*` / `--font-*`) to already be in scope — import that stylesheet first.
+targets, plus the surface's motion/skeleton/busy states. **Subtle functional depth** (per qte77's
+`brand/DESIGN.md` "Motion & effects"): cards and the "working" chip use `var(--shadow-card)` for a
+warm, low-contrast elevation, and the loading skeleton uses a token-driven gradient shimmer; the
+chip is not a pill. Motion is limited to a subtle entrance and low-contrast pulses, all collapsed
+under `prefers-reduced-motion`. It expects `@qte77/ui-theme`'s CSS custom properties (`--color-*` /
+`--radius-*` / `--font-*` / `--shadow-card`) to already be in scope — import that stylesheet first.
 
 ## How
 

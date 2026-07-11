@@ -1,6 +1,6 @@
 {
   "name": "@qte77/a2ui-agui-kit",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Shared AG-UI + A2UI protocol bridge: contract validation, event vocabulary, prompt-injection guard, a runtime-agnostic provider/tool-call combinator, and an optional React presentation layer (A2UISurface/CatalogViewer/EventStream) with flattened A2UI surface styles.",
   "type": "module",
   "license": "Apache-2.0",
@@ -45,13 +45,17 @@
   "peerDependencies": {
     "zod": "^4.4.3",
     "react": "^19.2.0",
-    "@a2ui/react": ">=0.10.1 <0.11"
+    "@a2ui/react": ">=0.10.1 <0.11",
+    "@qte77/ui-theme": "^0.2.0"
   },
   "peerDependenciesMeta": {
     "react": {
       "optional": true
     },
     "@a2ui/react": {
+      "optional": true
+    },
+    "@qte77/ui-theme": {
       "optional": true
     }
   },
