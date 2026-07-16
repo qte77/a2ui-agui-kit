@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `docs/decisions/0001-keep-a2ui-render-layer.md`: ADR recording the decision to keep A2UI as the
+  render layer (bet on the protocol, not the `@a2ui/react` renderer; no dual-render hedge), with
+  revisit triggers tracked in #4. From a 2026-07 A2UI-vs-Vercel-json-render deep-research pass.
 - Version 0.2.0: React presentation layer + flattened A2UI surface styles as new package entry
   points. `src/react/` (exported as `@qte77/a2ui-agui-kit/react`): `A2UISurface.tsx`
   (`A2UISurfaceProvider`/`A2UISurface`, ported from agenthud-agui-a2ui's `ui/src/A2UISurface.tsx`

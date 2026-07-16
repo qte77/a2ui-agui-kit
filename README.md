@@ -129,6 +129,7 @@ instead of two that can silently diverge. Executes
   [AG-UI](https://docs.ag-ui.com/introduction)
 - [Contributing](CONTRIBUTING.md) — dev setup, tests, releasing
 - [AGENTS.md](AGENTS.md) — behavioral rules for AI agents working on this repo
+- [docs/decisions/](docs/decisions/) — ADRs (why A2UI as the render layer + revisit triggers)
 - [agenthud-agui-a2ui](https://github.com/qte77/agenthud-agui-a2ui) — superset source
 - [ldnmxx-hack](https://github.com/qte77/ldnmxx-hack) — subset source
 
