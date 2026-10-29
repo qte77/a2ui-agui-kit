@@ -8,7 +8,7 @@
 
 `@qte77/a2ui-agui-kit` is the estate's seam over the agent-driven UI stack: agents emit an A2UI
 UI description (rendered via `@a2ui/react`, pre-1.0), streamed over AG-UI, consumed by agenthud and
-ldnmxx. `@a2ui/react` being pre-1.0 raised whether to migrate the render layer to Vercel's
+ldnmxx-hack. `@a2ui/react` being pre-1.0 raised whether to migrate the render layer to Vercel's
 json-render (`json-render.dev` / `vercel-labs/json-render`).
 
 A deep-research pass (fan-out + adversarial verification, 2026-07) established:
@@ -36,7 +36,7 @@ A deep-research pass (fan-out + adversarial verification, 2026-07) established:
 
 ## Consequences
 
-- Consumers (agenthud, ldnmxx) import only from `@qte77/a2ui-agui-kit`, so the protocol dependency
+- Consumers (agenthud, ldnmxx-hack) import only from `@qte77/a2ui-agui-kit`, so the protocol dependency
   stays contained; a future renderer swap is a package-internal change, not an app rewrite.
 - The A2UI protocol/contract investment (`src/contract.ts`, `src/applyA2UIEvent.ts`) survives even if
   the renderer is later swapped — json-render is building toward rendering A2UI.
