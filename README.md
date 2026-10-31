@@ -117,7 +117,7 @@ import { A2UISurfaceProvider, A2UISurface, EventStream } from "@qte77/a2ui-agui-
 ## Why
 
 Two apps (agenthud-agui-a2ui, ldnmxx-hack) independently grew the same A2UI contract,
-event-log shape, and injection guard, with agenthud's superset drifting from ldnmxx's
+event-log shape, and injection guard, with agenthud's superset drifting from ldnmxx-hack's
 subset each time either changed. Extracting the shared, dependency-light pieces into one
 package keeps both — and any future AG-UI/A2UI consumer — validating against one schema
 instead of two that can silently diverge. Executes
