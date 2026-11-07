@@ -1,12 +1,12 @@
 // Parameterized system-prompt builder: the A2UI catalog-authoring rules shared by every
-// consumer (agenthud's live agent, ldnmxx's Founder's Copilot), with the app's own persona/task
+// consumer (agenthud's live agent, ldnmxx-hack's Founder's Copilot), with the app's own persona/task
 // instructions supplied by the caller. No grant/founders-domain content lives here — the app
 // passes that in as `domainInstructions`.
 //
 // A2UI_CATALOG_RULES below is agenthud's SYSTEM_PROMPT (src/agent/prompts.ts) with its
-// app-framing sentence removed: it is a strict superset of ldnmxx's condensed A2UI_RULES
+// app-framing sentence removed: it is a strict superset of ldnmxx-hack's condensed A2UI_RULES
 // (shared/prompt.ts) — same beginRendering/surfaceUpdate/root/acyclic-tree rules, plus the
-// component shapes ldnmxx's condensed version omits (Image, Divider, Button, CheckBox, Slider,
+// component shapes ldnmxx-hack's condensed version omits (Image, Divider, Button, CheckBox, Slider,
 // Tabs) and the dataModelUpdate seeding step. A model that follows the fuller reference also
 // satisfies the condensed one, so "combining" the two sources means keeping the superset as the
 // one shared reference rather than reconciling two diverging texts.
