@@ -10,3 +10,6 @@ dist/
 # misc
 *.log
 .DS_Store
+
+# Personal Claude Code settings, never shared
+.claude/settings.local.json

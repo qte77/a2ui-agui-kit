@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Security
+
+- Dependency security update: `@a2ui/react` 0.10.2 (dev) pulls `@a2ui/web_core` 0.10.7, fixing the critical `openUrl` `javascript:` URI advisory (GHSA-72qq-p3r5-f7wq); an override moves the copy nested under `@a2ui/markdown-it` (which uses it only for types) to the same version. `vitest` ^4.1.12, a `minimatch` ^11.0.1 override (GHSA-g3hv-75wg-m249) and an `npm audit fix` lockfile refresh clear the remaining critical, moderate and low advisories. Still open: `zod` 3.x (GHSA-mrhx-c7xc-m3w5, high) is required by `@a2ui/react` and has no 3.x fix.
+
 ### Changed
 
 - Version 0.3.0: restore **functional depth** to `styles/a2ui.css` — cards, the loading skeleton,
