@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- CI and the npm publish workflow set up Node 24 instead of 22 (estate move to Node 24 only); CONTRIBUTING says Node.js 24+. The package still declares no `engines`, so consumers are not restricted. `packages: write` moves from the publish workflow's top level to its one job.
 - Version 0.3.0: restore **functional depth** to `styles/a2ui.css` — cards, the loading skeleton,
   and the "working" chip regain `box-shadow: var(--shadow-card)`, and the skeleton's loading
   **shimmer** is a token-driven `linear-gradient` background-position sweep again (0.2.0 had
