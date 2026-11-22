@@ -16,7 +16,7 @@ One audience per file — reference, don't duplicate:
 
 ## Development
 
-Requires Node.js 22+.
+Requires Node.js 24+.
 
 ```bash
 npm install        # dependencies (zod is a peerDependency; also listed as a devDependency for local work)
